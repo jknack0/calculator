@@ -65,6 +65,7 @@ public class EvaluatorUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent arg0) {
-        // You need to fill in this fuction
+        this.txField.setText(this.txField.getText()+arg0.getActionCommand());
+
     }
 }

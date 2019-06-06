@@ -22,8 +22,8 @@ public class EvaluatorDriver {
     /**
      * **** Static Initializer Block Explanation ****
      * This block of code is called a static initializer. It is executed when
-     * this class loaded  by the JVM. Now, when the class is loaded is tricky.
-     * But since this class has a main method and we use it as out main class,
+     * this class loaded  by the JVM. When the class is actually loaded is tricky.
+     * But since this class has a main method and we can use it as our main class,
      * it will be loaded immediately. However, if it wasn't our main class, it
      * would be loaded when the class is referenced.
      */
