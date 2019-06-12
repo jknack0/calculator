@@ -4,29 +4,44 @@ package edu.csc413.calculator.evaluator;
  * in a valid mathematical expression.
  */
 public class Operand {
+  public int operandValue;
+
   /**
   * construct operand from string token.
   */  
   public Operand( String token ) {
-    
+    operandValue = Integer.parseInt(token);
   }
+
   /**
    * construct operand from integer
    */
   public Operand( int value ) {
-    
+    operandValue = value;
   }
+
   /**
-   * return value of opernad
+   * return value of operand
    */
   public int getValue() {
-      return 0;
+    return operandValue;
   }
+
   /**
    * Check to see if given token is a valid
    * operand.
    */
   public static boolean check( String token ) {
-    return false;
+    // I got found this https://stackoverflow.com/questions/40519580/trying-to-determine-if-a-string-is-an-integer
+    // There was the try/catch  with parseInt() but I didn't like that one so I was inspired by this one
+
+    for(int i = 0; i < token.length();i++) {
+      if(Character.isDigit(token.charAt(i))) {
+        continue;
+      } else {
+        return false;
+      }
+    }
+    return true;
   }
 }

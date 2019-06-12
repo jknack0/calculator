@@ -37,7 +37,7 @@ public class Evaluator {
 
   public int eval(String expression ) {
     String token;
-
+/*
     // The 3rd argument is true to indicate that the delimiters should be used
     // as tokens, too. But, we'll need to remember to filter out spaces.
     this.tokenizer = new StringTokenizer( expression, DELIMITERS, true );
@@ -60,7 +60,7 @@ public class Evaluator {
           // The Operator class should contain an instance of a HashMap,
           // and values will be instances of the Operators.  See Operator class
           // skeleton for an example.
-          Operator newOperator = new Operator();
+           Operator newOperator = new Operator();
           
           while (operatorStack.peek().priority() >= newOperator.priority() ) {
             // note that when we eval the expression 1 - 2 we will
@@ -88,7 +88,7 @@ public class Evaluator {
     // that is, we should keep evaluating the operator stack until it is empty;
     // Suggestion: create a method that takes an operator as argument and
     // then executes the while loop.
-    
+    */
     return 0;
   }
 }

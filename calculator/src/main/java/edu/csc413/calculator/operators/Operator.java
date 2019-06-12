@@ -17,7 +17,15 @@ public abstract class Operator {
     // HashMap operators = new HashMap();
     // operators.put( "+", new AdditionOperator() );
     // operators.put( "-", new SubtractionOperator() );
-    
+
+    public static HashMap operators = new HashMap<String, Operator>();
+    static {
+        operators.put("+", new AddOperator());
+        operators.put("-", new SubtractOperator());
+        operators.put("*", new MultiplyOperator());
+        operators.put("/", new DivideOperator());
+        operators.put("^", new PowerOperator());
+    }
     
     public abstract int priority();
     public  Operand execute(Operand op1, Operand op2 ){
@@ -32,7 +40,7 @@ public abstract class Operator {
      * Think about what happens if we add more operators.
      */
     public static boolean check( String token ) {
-        return false;
+        return operators.containsKey(token);
     }
 
 
