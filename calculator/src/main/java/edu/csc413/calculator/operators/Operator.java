@@ -1,9 +1,5 @@
 package edu.csc413.calculator.operators;
-
-
-
 import edu.csc413.calculator.evaluator.Operand;
-
 import java.util.HashMap;
 
 public abstract class Operator {
@@ -18,13 +14,15 @@ public abstract class Operator {
     // operators.put( "+", new AdditionOperator() );
     // operators.put( "-", new SubtractionOperator() );
 
-    public static HashMap operators = new HashMap<String, Operator>();
+    private static HashMap<String, Operator> operators = new HashMap();
     static {
         operators.put("+", new AddOperator());
         operators.put("-", new SubtractOperator());
         operators.put("*", new MultiplyOperator());
         operators.put("/", new DivideOperator());
         operators.put("^", new PowerOperator());
+        operators.put("(", new OpenParenthesis());
+        operators.put(")", new ClosingParenthesis());
     }
     
     public abstract int priority();
@@ -44,5 +42,8 @@ public abstract class Operator {
     }
 
 
-    public static Operator getOperator(String token){return null;}
+    public static Operator getOperator(String token){
+        Operator op = operators.get(token);
+        return op;
+    }
 }

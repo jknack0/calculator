@@ -12,7 +12,7 @@ public class Evaluator {
   private Stack<Operand> operandStack;
   private Stack<Operator> operatorStack;
   private StringTokenizer tokenizer;
-  private static final String DELIMITERS = "+-*^/ ";
+  private static final String DELIMITERS = "+-*^/() ";
 
   public Evaluator() {
     operandStack = new Stack<>();
@@ -35,9 +35,15 @@ public class Evaluator {
     return Objects.hash(operandStack, operatorStack, tokenizer);
   }
 
+  public void process() {
+    Operand op2 = operandStack.pop();
+    Operand op1 = operandStack.pop();
+    operandStack.push(operatorStack.pop().execute(op1,op2));
+  }
+
   public int eval(String expression ) {
     String token;
-/*
+
     // The 3rd argument is true to indicate that the delimiters should be used
     // as tokens, too. But, we'll need to remember to filter out spaces.
     this.tokenizer = new StringTokenizer( expression, DELIMITERS, true );
@@ -46,7 +52,7 @@ public class Evaluator {
     while ( this.tokenizer.hasMoreTokens() ) {
       // filter out spaces
       if ( !( token = this.tokenizer.nextToken() ).equals( " " )) {
-        // check if token is an operand
+        // check if token is an operand push to stack
         if ( Operand.check( token )) {
           operandStack.push( new Operand( token ));
         } else {
@@ -54,13 +60,31 @@ public class Evaluator {
             System.out.println( "*****invalid token******" );
             throw new RuntimeException("*****invalid token******");
           }
+        if ( Operator.check(token) && operatorStack.empty() && !token.equals("(")  && !token.equals(")") ){
+          operatorStack.push(Operator.getOperator(token));
+        } else if ( Operator.check(token)  &&
+                    !operatorStack.empty() &&
+                    Operator.getOperator(token).priority() > operatorStack.peek().priority() ) {
+          operatorStack.push(Operator.getOperator(token));
+        } else if ( token.equals("(") ) {
+          operatorStack.push(Operator.getOperator(token));
+        } else if ( token.equals(")") ) {
+          while( operatorStack.peek() != Operator.getOperator("(")) {
+            process();
+          }
+          operatorStack.pop();
+        } else {
+          process();
+          operatorStack.push(Operator.getOperator(token));
+        }
 
 
+          /*
           // TODO Operator is abstract - these two lines will need to be fixed:
           // The Operator class should contain an instance of a HashMap,
           // and values will be instances of the Operators.  See Operator class
           // skeleton for an example.
-           Operator newOperator = new Operator();
+           //Operator newOperator = new Operator();
           
           while (operatorStack.peek().priority() >= newOperator.priority() ) {
             // note that when we eval the expression 1 - 2 we will
@@ -71,13 +95,16 @@ public class Evaluator {
             Operand op2 = operandStack.pop();
             Operand op1 = operandStack.pop();
             operandStack.push( oldOpr.execute( op1, op2 ));
-          }
+          }*/
 
-          operatorStack.push( newOperator );
+
         }
       }
     }
+    while(!operatorStack.empty()) {
+      process();
 
+    }
     
     // Control gets here when we've picked up all of the tokens; you must add
     // code to complete the evaluation - consider how the code given here
@@ -88,7 +115,7 @@ public class Evaluator {
     // that is, we should keep evaluating the operator stack until it is empty;
     // Suggestion: create a method that takes an operator as argument and
     // then executes the while loop.
-    */
-    return 0;
+
+    return operandStack.pop().getValue();
   }
 }
