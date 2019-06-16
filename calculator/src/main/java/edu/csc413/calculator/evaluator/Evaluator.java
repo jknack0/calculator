@@ -78,32 +78,11 @@ public class Evaluator {
           operatorStack.push(Operator.getOperator(token));
         }
 
-
-          /*
-          // TODO Operator is abstract - these two lines will need to be fixed:
-          // The Operator class should contain an instance of a HashMap,
-          // and values will be instances of the Operators.  See Operator class
-          // skeleton for an example.
-           //Operator newOperator = new Operator();
-          
-          while (operatorStack.peek().priority() >= newOperator.priority() ) {
-            // note that when we eval the expression 1 - 2 we will
-            // push the 1 then the 2 and then do the subtraction operation
-            // This means that the first number to be popped is the
-            // second operand, not the first operand - see the following code
-            Operator oldOpr = operatorStack.pop();
-            Operand op2 = operandStack.pop();
-            Operand op1 = operandStack.pop();
-            operandStack.push( oldOpr.execute( op1, op2 ));
-          }*/
-
-
         }
       }
     }
     while(!operatorStack.empty()) {
       process();
-
     }
     
     // Control gets here when we've picked up all of the tokens; you must add
