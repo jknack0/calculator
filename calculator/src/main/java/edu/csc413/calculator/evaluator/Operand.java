@@ -4,7 +4,7 @@ package edu.csc413.calculator.evaluator;
  * in a valid mathematical expression.
  */
 public class Operand {
-  public int operandValue;
+  private int operandValue;
 
   /**
   * construct operand from string token.

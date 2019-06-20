@@ -81,19 +81,10 @@ public class Evaluator {
         }
       }
     }
+
     while(!operatorStack.empty()) {
       process();
     }
-    
-    // Control gets here when we've picked up all of the tokens; you must add
-    // code to complete the evaluation - consider how the code given here
-    // will evaluate the expression 1+2*3
-    // When we have no more tokens to scan, the operand stack will contain 1 2
-    // and the operator stack will have + * with 2 and * on the top;
-    // In order to complete the evaluation we must empty the stacks, 
-    // that is, we should keep evaluating the operator stack until it is empty;
-    // Suggestion: create a method that takes an operator as argument and
-    // then executes the while loop.
 
     return operandStack.pop().getValue();
   }
